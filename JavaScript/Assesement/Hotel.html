@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corner Restaurant Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: auto;
+            background-color: blanchedalmond;
+            padding: 50px;
+        }
+
+        label,
+        select,
+        input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+   
+        <h2>Corner Restaurant Booking</h2>
+        <form id="bookingForm">
+            <label>Choice of Booking:</label>
+            <select id="bookingType" onchange="toggleFields()">
+                <option value="">Select Booking Type</option>
+                <option value="full">Full Day Booking</option>
+                <option value="half">Half Day Booking</option>
+                <option value="hourly">Hourly Booking</option>
+            </select>
+
+            <label>User Name:</label>
+            <input type="text" id="userName" required>
+
+            <label>Mobile Number:</label>
+            <input type="tel" id="mobileNumber" required>
+
+            <label>Email:</label>
+            <input type="email" id="email" required>
+
+            <label>No of Persons:</label>
+            <input type="number" id="noOfPersons" required>
+
+            <label id="dateLabel">Date:</label>
+            <input type="date" id="date">
+
+            <label id="slotLabel" class="hidden">Slot:</label>
+            <select id="slot" class="hidden">
+                <option value="">Select Slot</option>
+                <option value="breakfast">Breakfast</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
+            </select>
+
+            <label id="timeLabel" class="hidden">Time:</label>
+            <input type="time" id="time" class="hidden">
+
+            <button type="submit">Submit</button>
+        </form>
+ 
+
+    <script>
+        function toggleFields() {
+            let bookingType = document.getElementById("bookingType").value;
+            let date = document.getElementById("date");
+            let time = document.getElementById("time");
+            let slot = document.getElementById("slot");
+            let timeLabel = document.getElementById("timeLabel");
+            let slotLabel = document.getElementById("slotLabel");
+
+            date.classList.remove("hidden");
+            slot.classList.add("hidden");
+            time.classList.add("hidden");
+            slotLabel.classList.add("hidden");
+            timeLabel.classList.add("hidden");
+
+            if (bookingType === "full") {
+                slot.value = "";
+                time.value = "";
+            } else if (bookingType === "half") {
+                slot.classList.remove("hidden");
+                slotLabel.classList.remove("hidden");
+                time.value = "";
+            } else if (bookingType === "hourly") {
+                time.classList.remove("hidden");
+                timeLabel.classList.remove("hidden");
+                slot.value = "";
+            }
+        }
+    </script>
+</body>
+
+</html>
